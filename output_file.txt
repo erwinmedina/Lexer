@@ -10,3 +10,13 @@ Identifier		r
 Operator		=
 Number			28.00
 Separator		;
+Keyword			while
+Separator		(
+Identifier		t 
+Operator		<
+Identifier		lower
+Separator		)
+Identifier		r 
+Operator		=
+Number			28.00
+Separator		;

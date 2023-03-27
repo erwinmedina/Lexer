@@ -13,19 +13,28 @@ void Lexer(std::string input_text, std::ofstream &myfile) {
     // ----------------------------------------------------------- //
     // Creates the vectors for keywords, separators, and operators //
     // ----------------------------------------------------------- //
+    std::vector<std::string> comments = {"//", "\"", "\'", "#"};
     std::vector<std::string> keywords = {"while", "if", "else", "min", "max", "for"};
-    std::vector<char> separators = {';', '(', ')', '[', ']', '{', '}'};
-    std::vector<char> operators = {'<', '>', '+', '-', '=', '*', '%'};
+    std::vector<std::string> separators = {";", "(", ")", "[", "]", "{", "}"};
+    std::vector<std::string> operators = {"<", ">", "+", "-", "=", "==", "*", "%"};
 
     // --------------------------- //
     // Iterates through input_text //
     // --------------------------- //
     for (int i = 0; i < input_text.length(); i++) {
+        std::string inputVal(1, input_text[i]); // Converts char to string for easier manipulation
+
+        // ---------------- //
+        // Handles Comments //
+        // ---------------- //
+        if (std::find(comments.begin(), comments.end(), inputVal) != comments.end()) {
+            break;
+        }
 
         // ------------------------------------------------ //
         // Handles if white space and nothing in charHolder //
         // ------------------------------------------------ //
-        if (input_text[i] == ' ' && charHolder == "") {
+        if (inputVal == " " && charHolder == "") {
             continue;
         };
 
@@ -40,7 +49,7 @@ void Lexer(std::string input_text, std::ofstream &myfile) {
         // ---------------------- //
         // Handles the Separators //
         // ---------------------- //
-        else if (std::find(separators.begin(), separators.end(), input_text[i]) != separators.end()) {
+        else if (std::find(separators.begin(), separators.end(), inputVal) != separators.end()) {
 
             // Handles if string in charHolder can be converted to float //
             try {
@@ -55,13 +64,13 @@ void Lexer(std::string input_text, std::ofstream &myfile) {
                     charHolder = "";
                 }
             }
-            myfile << "Separator" << "\t\t" << input_text[i] << std::endl;
+            myfile << "Separator" << "\t\t" << inputVal << std::endl;
         }
         
         // --------------------- //
         // Handles the Operators //
         // --------------------- //
-        else if (std::find(operators.begin(), operators.end(), input_text[i]) != operators.end()) {
+        else if (std::find(operators.begin(), operators.end(), inputVal) != operators.end()) {
             
             // Handles if string in charHolder can be converted to float //
             try {
@@ -77,14 +86,14 @@ void Lexer(std::string input_text, std::ofstream &myfile) {
                 }
             }
 
-            myfile << "Operator" << "\t\t" << input_text[i] << std::endl;
+            myfile << "Operator" << "\t\t" << inputVal << std::endl;
         }
 
         // --------------------------------------------------------- //
         // If none of the above conditions, put char into charHolder //
         // --------------------------------------------------------- //
         else {
-            charHolder.push_back(input_text[i]);
+            charHolder.append(inputVal);
         };
     }
 };
@@ -101,13 +110,18 @@ int main() {
     myfile.open("output_file.txt");
     myfile << "Token" << "\t\t\t" << "Lexeme\n" << std::endl;
 
-    // ----------------------------------------- //
-    // Opens input file, gets lines, calls Lexer //
-    // ----------------------------------------- //
+    // ----------------------------------------------------- //
+    // Opens input file, gets lines, calls Lexer, close file //
+    // ----------------------------------------------------- //
     std::string myText;
     std::ifstream MyReadFile("input_scode.txt");
-    std::getline(MyReadFile, myText); // Stores line into 'myText'
-    Lexer(myText, myfile);
+
+    while (getline(MyReadFile, myText)) {
+        Lexer(myText, myfile);
+
+    }
+
+    myfile.close();
 
     return 0;
 }
