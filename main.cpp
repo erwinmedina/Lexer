@@ -118,7 +118,6 @@ int main() {
 
     while (getline(MyReadFile, myText)) {
         Lexer(myText, myfile);
-
     }
 
     myfile.close();

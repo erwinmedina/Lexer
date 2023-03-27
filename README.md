@@ -9,7 +9,6 @@ To create a lexical analyzer that involves parsing the given character stream fr
 - Type `./build.sh` in the terminal/command prompt to run the program.
 - If you're having difficulties, contact me.
 
-
 ## Programmer/Developer:
 Name | Email
 ---- | -----
@@ -25,3 +24,11 @@ CS-323 | Compilers & Languages | 03 | Susmitha Padda
 ![Input](https://i.imgur.com/Z6zElWg.png)
 ---
 ![Output](https://i.imgur.com/vElWkKK.png)
+
+## Pluses / Minuses
+✅ Pluses | ❌ Minuses
+------ | -------
+Completes objective. | Can't catch _EVERY_ keyword/operator. Needs better database for that.
+Parses through input file. | Slightly redundant with catch/try; implement better solution.
+Ignores comments + line breaks. | Not designed for duplicate/back-to-back chars [e.g. "==" or "//"].
+Tokenizes every lexeme. | Doesn't handle text in strings [e.g. "Hello there"].
