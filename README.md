@@ -1,4 +1,4 @@
-# Assignment 1 - Lexer/Scanner
+# Project 1 - Lexer/Scanner
 
 ## Objective:
 To create a lexical analyzer that involves parsing the given character stream from an input file. The final product is an output file with all lexemes separated into tokens.
@@ -7,7 +7,7 @@ To create a lexical analyzer that involves parsing the given character stream fr
 - This code was written in C++, and uses a build.sh file in order to run.
 - Type `chmod +x build.sh` in the terminal/command prompt, allowing executable permissions.
 - Type `./build.sh` in the terminal/command prompt to run the program.
-- If you're having difficulties, contact me.
+- If you're having difficulties, please contact me.
 
 ## Programmer/Developer:
 Name | Email
@@ -32,3 +32,4 @@ Completes objective. | Can't catch _EVERY_ keyword/operator. Needs better databa
 Parses through input file. | Slightly redundant with catch/try; implement better solution.
 Ignores comments + line breaks. | Not designed for duplicate/back-to-back chars [e.g. "==" or "//"].
 Tokenizes every lexeme. | Doesn't handle text in strings [e.g. "Hello there"].
+|| Doesn't handle if an identifier/number is the very last lexeme.
